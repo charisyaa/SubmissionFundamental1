@@ -7,7 +7,7 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
-    @GET("events?active=0")
+    @GET("events")
     fun getEvent(
         @Query("active") active: Int
     ): Call<EventResponse>

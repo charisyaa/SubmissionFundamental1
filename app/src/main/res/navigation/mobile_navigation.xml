@@ -16,11 +16,5 @@
         android:name="com.example.submissionpertamafundamental.ui.finished.FinishedFragment"
         android:label="@string/title_finished"
         tools:layout="@layout/fragment_finished" />
-    <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.example.submissionpertamafundamental.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
-
 
 </navigation>
