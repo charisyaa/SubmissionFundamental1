@@ -1,5 +1,6 @@
 package com.example.submissionpertamafundamental.ui.finished
 
+import android.content.Intent
 import androidx.fragment.app.viewModels
 import android.os.Bundle
 import android.util.Log
@@ -15,6 +16,7 @@ import com.data.retrofit.ApiConfig
 import com.example.submissionpertamafundamental.R
 import com.example.submissionpertamafundamental.databinding.FragmentFinishedBinding
 import com.example.submissionpertamafundamental.ui.EventAdapter
+import com.example.submissionpertamafundamental.ui.EventDetailActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -74,7 +76,14 @@ class FinishedFragment : Fragment() {
     }
 
     private fun setEventData(listEvent: List<ListEventsItem>) {
-        val adapter = EventAdapter()
+        val adapter = EventAdapter {event ->
+            val intent = Intent(requireContext(), EventDetailActivity::class.java)
+            intent.putExtra("EVENT_NAME", event.name)
+            intent.putExtra("EVENT_DESCRIPTION", event.description)
+            intent.putExtra("EVENT_IMAGE", event.imageLogo)
+            intent.putExtra("EVENT_LINK", event.link)
+            startActivity(intent)
+        }
         adapter.submitList(listEvent)
         binding.rvNameFinished.adapter = adapter
     }

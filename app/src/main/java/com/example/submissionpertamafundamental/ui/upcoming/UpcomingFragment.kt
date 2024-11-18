@@ -1,6 +1,7 @@
 package com.example.submissionpertamafundamental.ui.upcoming
 
-import androidx.fragment.app.viewModels
+//import androidx.fragment.app.viewModels
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,9 +13,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.data.response.EventResponse
 import com.data.response.ListEventsItem
 import com.data.retrofit.ApiConfig
-import com.example.submissionpertamafundamental.R
+//import com.example.submissionpertamafundamental.R
+//import com.example.submissionpertamafundamental.databinding.ActivityMainBinding
 import com.example.submissionpertamafundamental.databinding.FragmentUpcomingBinding
 import com.example.submissionpertamafundamental.ui.EventAdapter
+import com.example.submissionpertamafundamental.ui.EventDetailActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -74,7 +77,15 @@ class UpcomingFragment : Fragment() {
     }
 
     private fun setEventData(listEvent: List<ListEventsItem>) {
-        val adapter = EventAdapter()
+        val adapter = EventAdapter { event ->
+            val intent = Intent(requireContext(), EventDetailActivity::class.java)
+            intent.putExtra("EVENT_NAME", event.name)
+            intent.putExtra("EVENT_DESCRIPTION", event.description)
+            intent.putExtra("EVENT_IMAGE", event.imageLogo)
+            intent.putExtra("EVENT_LINK", event.link)
+            startActivity(intent)
+        }
+
         adapter.submitList(listEvent)
         binding.rvNameUpcoming.adapter = adapter
     }
